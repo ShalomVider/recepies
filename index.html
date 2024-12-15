@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for recipes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img src="Photos/Logo.webp" alt="Logo" class="logo">
+
+        <div class="search_bar">
+            <input type="text" id="search_input" placeholder="Enter a recipe to search">
+            <button id="search_button">Search</button>
+        </div>
+
+        <div class="favorites">
+            <button class="favorites-button">&#x2665;</button>
+            <div class="favorites-dropdown">
+                <p>No favorites yet</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="main_screen">
+        <div class="list_of_recipes"></div>
+        <div class="recipe_display"></div>
+        <div class="shopping_list">
+            <ul id="shopping-list-items"></ul>
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

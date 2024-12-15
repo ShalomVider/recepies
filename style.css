@@ -1,0 +1,559 @@
+html, body {
+    overflow: hidden; /* מונע גלילה כללית במסך הראשי */
+    height: 100%; /* מוודא שהגובה של body ו-html תואם לגובה המסך */
+}
+
+
+body{
+    background: url(Photos/background.webp) no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+header, .content, footer {
+    text-align: center;
+    color: white; /* להפוך את הטקסט לקריא */
+    background-color: rgba(0, 0, 0, 0.5); /* רקע שקוף למחצה */
+    padding: 5px;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+header .logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain; /*דואג לשמור על היחס של התמונה */
+    padding: 15px;
+}
+
+.search_bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* רווח בין הקלט לכפתור */
+  margin: 20px;
+}
+
+#search_input {
+  width: 300px; /* רוחב שדה החיפוש */
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.5); /* גבול שקוף למחצה */
+  border-radius: 20px; /* פינות מעוגלות */
+  background-color: rgba(0, 0, 0, 0.6); /* רקע כהה חצי-שקוף */
+  color: white; /* צבע טקסט */
+  font-size: 16px; /* גודל טקסט */
+  outline: none; /* מסיר את המסגרת הכחולה כשמקבלים פוקוס */
+  transition: all 0.3s ease; /* אפקט מעבר חלק */
+}
+
+#search_input:focus {
+  border-color: rgba(255, 165, 0, 1); /* צבע כתום בגבול כשמקבלים פוקוס */
+  background-color: rgba(0, 0, 0, 0.8); /* רקע כהה יותר בפוקוס */
+}
+
+#search_button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #8B0000, #FF6347); /* מעבר צבעים כהים */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* צל למראה מודרני */
+  transition: all 0.3s ease;
+}
+
+#search_button:hover {
+  background: linear-gradient(135deg, #FF6347, #FF4500); /* שינוי צבעים בהובר */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* צל חזק יותר */
+  transform: scale(1.05); /* אפקט זום קל */
+}
+
+/* עיצוב המסך הראשי */
+.main_screen {
+    display: flex;
+    gap: 10px;
+    height: calc(100vh - 100px); /* גובה המסך פחות ה-header */
+    padding: 10px;
+}
+
+/* עיצוב העמודות */
+.list_of_recipes,
+.recipe_display,
+.shopping_list {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6); /* רקע כהה ושקוף */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* עיצוב העמודה השמאלית */
+.list_of_recipes {
+    flex: 1; /* תופסת חלק אחד מהרוחב */
+    overflow-y: auto; /* פס גלילה אנכי */
+    max-height: 100%; /* גובה מוגבל לגובה המסך */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+/* פס גלילה מותאם */
+.list_of_recipes::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list_of_recipes::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+
+.list_of_recipes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* עמודה מרכזית */
+.recipe_display {
+    flex: 3; /* תופסת 3 חלקים מהרוחב */
+}
+
+/* עמודת רשימת הקניות */
+.shopping_list {
+    flex: 1; /* תופסת חלק אחד מהרוחב */
+}
+
+/* עיצוב כרטיסי המתכונים */
+.recipe-card {
+    display: flex;
+    align-items: center; /* יישור אנכי */
+    justify-content: flex-start; /* יישור תוכן לצד שמאל */
+    background-color: rgba(255, 255, 255, 0.2); /* רקע שקוף */
+    margin-bottom: 8px; /* רווח בין כרטיסים */
+    padding: 5px; /* רווח פנימי קטן */
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* צל קל */
+    height: 80px; /* גובה קבוע לכרטיס */
+    width: 100%; /* כרטיס תופס את כל הרוחב */
+    
+    overflow: hidden;
+}
+
+/* תמונת מתכון */
+.recipe-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* תמונה עגולה */
+    margin-right: 10px; /* רווח בין התמונה לטקסט */
+}
+
+/* שם המתכון */
+.recipe-card h3 {
+    font-size: 17px; /* גודל טקסט קטן */
+    margin: 0;
+}
+
+/* עיצוב כללי לעמודה האמצעית */
+.recipe_display {
+    background-color: rgba(0, 0, 0, 0.6); /* רקע כהה ושקוף */
+    border-radius: 10px; /* פינות מעוגלות */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* צל */
+    color: white; /* צבע טקסט */
+    padding: 20px; /* ריווח פנימי */
+    overflow-y: auto; /* גלילה אנכית */
+    max-height: calc(100vh - 150px); /* גובה מותאם למסך */
+    margin: 0 auto; /* מרכוז */
+    flex: 3; /* גמישות העמודה */
+    scrollbar-width: thin; /* פס גלילה צר */
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+.recipe_display h1 {
+    text-align: center; /* כותרת ממורכזת */
+    margin-top: 10px; /* ריווח מלמעלה */
+    font-size: 24px; /* גודל טקסט */
+}
+
+.recipe-main-image {
+    display: block; /* הפיכת התמונה לאלמנט בלוק */
+    margin: 0 auto; /* ממקם את התמונה במרכז */
+    max-width: 100%; /* מתאים את רוחב התמונה לקונטיינר */
+    max-height: 250px; /* מגביל את הגובה */
+    border-radius: 10px; /* פינות מעוגלות */
+}
+
+
+/* עיצוב פס גלילה (כרום ודפדפנים תומכים) */
+.recipe_display::-webkit-scrollbar {
+    width: 8px;
+}
+.recipe_display::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+.recipe_display::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* עיצוב פרטי המתכון (שורה תחתונה) */
+.recipe-info {
+    display: flex;
+    justify-content: space-between; /* פיזור שווה בין החלקים */
+    align-items: center; /* יישור אנכי */
+    margin-top: 15px;
+    padding: 10px 0;
+}
+
+/* כפתור הלב */
+.favorite-button {
+    background-color: transparent; /* ללא רקע */
+    border: none; /* ללא גבול */
+    font-size: 24px; /* גודל אייקון */
+    cursor: pointer;
+    color: white; /* צבע הלב */
+    transition: all 0.3s ease;
+}
+.favorite-button:hover {
+    color: red; /* שינוי צבע בהובר */
+    transform: scale(1.1); /* אפקט זום */
+}
+
+/* תמונת השעון והזמן */
+.time-info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* רווח בין האייקון לטקסט */
+}
+.time-info img {
+    width: 20px; /* גודל תמונת השעון */
+    height: 20px;
+}
+.time-text {
+    font-size: 16px; /* גודל טקסט */
+}
+
+/* תמונת האדם והכמות */
+.servings-info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* רווח בין האלמנטים */
+}
+.servings-info img {
+    width: 20px; /* גודל תמונת האדם */
+    height: 20px;
+}
+.servings-info .servings-control {
+    background-color: rgba(255, 255, 255, 0.2); /* כפתור שקוף */
+    border: none;
+    color: white; /* צבע טקסט */
+    padding: 5px 10px; /* ריווח פנימי */
+    border-radius: 4px; /* פינות מעוגלות */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.servings-info .servings-control:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* שינוי צבע בהובר */
+    color: black;
+}
+
+/* עיצוב רשימת הרכיבים */
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* שתי עמודות */
+    gap: 10px; /* רווח בין רכיבים */
+    margin-top: 20px;
+}
+.ingredient-item {
+    display: flex;
+    align-items: center; /* יישור אנכי */
+    gap: 8px; /* רווח בין האייקון לטקסט */
+    color: white; /* צבע טקסט */
+}
+.ingredient-icon {
+    width: 20px; /* גודל תמונת ה-checked */
+    height: 20px;
+}
+
+/* עיצוב כפתור "Add to Shopping List" */
+#add-to-shopping-list {
+    background: linear-gradient(135deg, #8B0000, #FF6347); /* מעבר צבעים כהים */
+    color: white; /* צבע טקסט */
+    font-size: 16px; /* גודל טקסט */
+    font-weight: bold; /* טקסט מודגש */
+    border: none; /* ללא גבול */
+    border-radius: 10px; /* פינות מעוגלות */
+    padding: 10px 15px; /* ריווח פנימי */
+    cursor: pointer;
+    margin: 20px auto; /* מרכוז הכפתור */
+    display: flex; /* תצוגה גמישה */
+    align-items: center; /* יישור אנכי */
+    justify-content: center; /* יישור אופקי */
+    gap: 8px; /* רווח בין התמונה לטקסט */
+    max-width: 250px; /* רוחב מקסימלי */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* צל */
+    transition: all 0.3s ease; /* אפקט מעבר */
+}
+
+#add-to-shopping-list img {
+    width: 20px; /* גודל התמונה */
+    height: 20px;
+}
+
+#add-to-shopping-list:hover {
+    background: linear-gradient(135deg, #FF6347, #FF4500); /* שינוי צבע בהובר */
+    transform: scale(1.05); /* אפקט זום */
+}
+
+/* עיצוב כפתור "Directions" */
+.directions-button {
+    background-color: rgba(0, 0, 0, 0.6); /* רקע כהה */
+    color: white; /* צבע טקסט */
+    font-size: 16px; /* גודל טקסט */
+    font-weight: bold; /* טקסט מודגש */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* גבול שקוף למחצה */
+    border-radius: 10px; /* פינות מעוגלות */
+    padding: 10px 15px; /* ריווח פנימי */
+    cursor: pointer;
+    margin: 10px auto; /* מרכוז הכפתור */
+    display: block; /* כפתור ממורכז */
+    max-width: 250px; /* רוחב מקסימלי */
+    text-align: center; /* יישור טקסט */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* צל */
+    transition: all 0.3s ease; /* אפקט מעבר */
+}
+
+.directions-button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* שינוי צבע בהובר */
+    color: black; /* שינוי צבע הטקסט */
+    transform: scale(1.05); /* אפקט זום */
+}
+
+/* עיצוב כללי לעמודת רשימת הקניות */
+.shopping_list {
+    background-color: rgba(0, 0, 0, 0.6); /* רקע כהה ושקוף */
+    border-radius: 10px; /* פינות מעוגלות */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* צל */
+    color: white; /* צבע טקסט */
+    padding: 20px; /* ריווח פנימי */
+    overflow-y: auto; /* גלילה אנכית */
+    max-height: calc(100vh - 150px); /* גובה מותאם למסך */
+    flex: 1; /* גמישות העמודה */
+    display: flex; /* יישור תוכן */
+    flex-direction: column; /* סידור אנכי */
+}
+
+/* פס גלילה מותאם אישית */
+.shopping_list::-webkit-scrollbar {
+    width: 8px;
+}
+.shopping_list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+.shopping_list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* כותרת רשימת הקניות */
+.shopping_list h2 {
+    text-align: center; /* ממורכז */
+    margin-bottom: 20px; /* ריווח מתחת לכותרת */
+    font-size: 22px; /* גודל טקסט */
+    text-transform: uppercase; /* אותיות גדולות */
+    color: #FFD700; /* צבע זהב */
+}
+
+/* עיצוב פריטים ברשימה */
+.shopping-list-item {
+    display: flex; /* יישור פריטים בשורה */
+    align-items: center; /* יישור אנכי */
+    justify-content: space-between; /* ריווח שווה */
+    background-color: rgba(255, 255, 255, 0.1); /* רקע בהיר שקוף */
+    border-radius: 8px; /* פינות מעוגלות */
+    padding: 10px; /* ריווח פנימי */
+    margin-bottom: 10px; /* רווח בין פריטים */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* צל קל */
+    width: 100%; /* תופס את כל רוחב העמודה */
+}
+
+/* טקסט של שם הפריט */
+.shopping-list-item span {
+    font-size: 16px; /* גודל טקסט */
+    color: white; /* צבע טקסט */
+    flex: 1; /* גמישות */
+    text-align: left; /* יישור לשמאל */
+}
+
+
+/* עיצוב כפתורי החצים */
+.amount-controls {
+    display: flex; /* יישור אלמנטים בשורה */
+    align-items: center; /* יישור אנכי */
+    gap: 5px; /* רווח בין הכפתורים */
+    flex: 0.4; /* גמישות */
+    justify-content: center; /* ממורכז */
+}
+
+/* עיצוב כפתורים */
+.amount-controls button {
+    background-color: rgba(255, 255, 255, 0.2); /* רקע בהיר שקוף */
+    border: none; /* ללא גבול */
+    color: white; /* צבע טקסט */
+    font-size: 14px; /* גודל טקסט */
+    padding: 5px; /* ריווח פנימי */
+    border-radius: 4px; /* פינות מעוגלות */
+    cursor: pointer;
+    transition: all 0.3s ease; /* מעבר חלק */
+    width: 30px; /* רוחב אחיד */
+    height: 30px; /* גובה אחיד */
+}
+
+.amount-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* שינוי צבע בהובר */
+    color: black; /* שינוי צבע טקסט */
+}
+
+/* עיצוב הטקסט של הכמות */
+.amount-display {
+    font-size: 16px; /* גודל טקסט */
+    color: white; /* צבע טקסט */
+    text-align: center; /* ממורכז */
+    flex: 0.2; /* גמישות קטנה */
+}
+
+
+
+/* כפתור הסרת פריט */
+.remove-item {
+    background-color: transparent; /* ללא רקע */
+    border: none; /* ללא גבול */
+    color: #FF6347; /* צבע אדום */
+    font-size: 20px; /* גודל אייקון */
+    cursor: pointer;
+    transition: all 0.3s ease; /* מעבר חלק */
+    flex: 0.2; /* תופס פחות מקום */
+    text-align: center; /* יישור למרכז */
+}
+
+
+.remove-item:hover {
+    color: red; /* שינוי צבע בהובר */
+    transform: scale(1.2); /* אפקט זום */
+}
+
+/* כפתור שליחת רשימת קניות */
+#send-email-button {
+    background: linear-gradient(135deg, #8B0000, #FF6347); /* מעבר צבעים כהים */
+    color: white; /* צבע טקסט */
+    font-size: 16px; /* גודל טקסט */
+    font-weight: bold; /* טקסט מודגש */
+    border: none; /* ללא גבול */
+    border-radius: 10px; /* פינות מעוגלות */
+    padding: 10px 20px; /* ריווח פנימי */
+    cursor: pointer;
+    margin: 20px auto; /* מרכוז הכפתור */
+    display: block; /* ממורכז */
+    max-width: 250px; /* רוחב מקסימלי */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* צל */
+    transition: all 0.3s ease; /* אפקט מעבר */
+}
+
+#send-email-button:hover {
+    background: linear-gradient(135deg, #FF6347, #FF4500); /* שינוי צבע בהובר */
+    transform: scale(1.05); /* אפקט זום */
+}
+
+/* עיצוב כללי למועדפים */
+.favorites {
+    position: relative;
+    display: inline-block;
+}
+
+.favorites-button {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.favorites-button:hover {
+    color: #FFD700; /* צבע זהב */
+}
+
+.favorites-dropdown {
+    display: none; /* מוסתרת כברירת מחדל */
+    position: absolute;
+    top: 50px; /* מרחק מכפתור המועדפים */
+    right: 0; /* מיושר לימין הכפתור */
+    background-color: rgba(0, 0, 0, 0.9); /* רקע כהה */
+    color: white;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto; /* גלילה אנכית אם יש צורך */
+    border-radius: 8px; /* פינות מעוגלות */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* צל */
+    z-index: 100; /* כדי להבטיח שהתפריט יוצג מעל אלמנטים אחרים */
+    padding: 15px; /* ריווח פנימי */
+}
+
+
+
+/* כרטיסי המועדפים */
+.favorite-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* רקע בהיר */
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-item:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* שינוי רקע בהובר */
+}
+
+.favorite-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* תמונה עגולה */
+    margin-right: 10px;
+}
+
+.favorite-title {
+    flex: 1;
+    font-size: 16px;
+    color: white;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.remove-favorite-button {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #FF6347; /* אדום */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.remove-favorite-button:hover {
+    color: red;
+    transform: scale(1.2);
+}
+
+
+
+
+
+
+
